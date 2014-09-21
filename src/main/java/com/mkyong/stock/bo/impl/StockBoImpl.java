@@ -3,6 +3,7 @@ package com.mkyong.stock.bo.impl;
 import com.mkyong.stock.bo.StockBo;
 import com.mkyong.stock.model.Stock;
 import com.mkyong.stock.dao.StockDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,9 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = false)
 public class StockBoImpl implements StockBo {
 
+    @Autowired
     StockDao stockDao;
 
-    @Transactional(readOnly = true)
     public void setStockDao(StockDao stockDao) {
         this.stockDao = stockDao;
     }
@@ -33,6 +34,7 @@ public class StockBoImpl implements StockBo {
         stockDao.delete(stock);
     }
 
+    @Transactional(readOnly = true)
     public Stock findByStockCode(String stockCode) {
         return stockDao.findByStockCode(stockCode);
     }
